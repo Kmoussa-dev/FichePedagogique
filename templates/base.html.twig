@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
@@ -14,6 +19,8 @@
         {% endblock %}
     </head>
     <body>
+    {{ include('disign/boot.html.twig') }}
         {% block body %}{% endblock %}
+
     </body>
 </html>
