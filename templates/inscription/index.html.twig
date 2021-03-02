@@ -20,7 +20,7 @@
         {% for inscription in inscriptions %}
             <tr>
                 <td>{{ inscription.id }}</td>
-                <td>{{ inscription.dateInscription ? inscription.dateInscription|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ inscription.dateInscription ? inscription.dateInscription|date('d-m-Y à H:i:s') : '' }}</td>
                 <td>{{ inscription.regimeRSE }}</td>
                 <td>{{ inscription.redoublant }}</td>
                 <td>{{ inscription.tierTemps }}</td>

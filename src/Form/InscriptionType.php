@@ -4,10 +4,14 @@ namespace App\Form;
 
 use App\Entity\Inscription;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class InscriptionType extends AbstractType
 {
@@ -24,11 +28,36 @@ class InscriptionType extends AbstractType
                 ],
                 'html5' => true,
             ))
-            ->add('regimeRSE')
-            ->add('redoublant')
-            ->add('tierTemps')
+            ->add('regimeRSE', ChoiceType::class, [
+                'choices' => [
+                    'oui' => 'Oui',
+
+                    'non' => 'Non',
+                ],
+                'expanded'=>true
+
+            ])
+            ->add('redoublant', ChoiceType::class, [
+                'choices' => [
+                    'oui' => 'Oui',
+
+                    'non' => 'Non',
+                ],
+                'expanded'=>true
+
+            ])
+            ->add('tierTemps', ChoiceType::class, [
+                'choices' => [
+                    'oui' => 'Oui',
+
+                    'non' => 'Non',
+                ],
+                'expanded'=>true
+
+            ])
         ;
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
