@@ -7,17 +7,48 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class InscriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('nom')
+            ->add('prenom')
+            ->add('dateNaissance', DateType::class, array(
+                'required' => true,
+                'widget' => 'single_text',
+                'attr' => [
+                    'type' => 'text',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-provide' => 'datepicker',
+                ],
+                'html5' => true,
+            ))
+
+            ->add('email')
+            ->add('tel', NumberType::class, array(
+                'required' => true,
+                'attr' => [
+                    'type' => 'text',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-provide' => 'numberpicker',
+                ],
+                'html5' => true,
+            ))
+            ->add('adresse')
+            ->add('numeroEtu', NumberType::class, array(
+                'required' => true,
+                'attr' => [
+                    'type' => 'text',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-provide' => 'numberpicker',
+                ],
+                'html5' => true,
+            ))
             ->add('dateInscription', DateTimeType::class, array(
                 'required' => true,
                 'widget' => 'single_text',
@@ -55,9 +86,18 @@ class InscriptionType extends AbstractType
                 'expanded'=>true
 
             ])
+            ->add('typeControleChoisi', ChoiceType::class, [
+                'choices' => [
+                    'Terminal Uniquement' => 'Terminal Uniquement',
+
+                    'Autre' => 'Autre',
+                ],
+                'expanded'=>true
+
+            ])
+
         ;
     }
-
 
     public function configureOptions(OptionsResolver $resolver)
     {
