@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matiere index{% endblock %}
+
+{% block body %}
+    <h1>Matiere index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identifiant Matiere</th>
+                <th>Nom de la Matiere</th>
+                <th>Matiere Obligatoire</th>
+                <th>Coefficient de la Matiere</th>
+                <th>Note Matiere</th></th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matiere in matieres %}
+            <tr>
+
+                <td>{{ matiere.idMatiere}}</td>
+                <td>{{ matiere.nomMatiere}}</td>
+
+
+
+
+                <td>
+                    <a href="{{ path('matiere_show', {'id': matiere.id}) }}">show</a>
+                    <a href="{{ path('matiere_edit', {'id': matiere.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('matiere_new') }}">Create new</a>
+{% endblock %}

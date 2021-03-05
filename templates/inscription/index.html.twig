@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>DateNaissance</th>
@@ -20,14 +19,14 @@
                 <th>Redoublant</th>
                 <th>RegimeRSE</th>
                 <th>TierTemps</th>
-                <th>TypeControleChoisi</th>
+                <th>TypeControle</th>
+                <th>semestre</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for inscription in inscriptions %}
             <tr>
-                <td>{{ inscription.id }}</td>
                 <td>{{ inscription.nom }}</td>
                 <td>{{ inscription.prenom }}</td>
                 <td>{{ inscription.dateNaissance ? inscription.dateNaissance|date('Y-m-d') : '' }}</td>
@@ -40,6 +39,7 @@
                 <td>{{ inscription.regimeRSE }}</td>
                 <td>{{ inscription.tierTemps }}</td>
                 <td>{{ inscription.typeControleChoisi }}</td>
+                <td>{{ inscription.idSemestre.numeroSemestre }}</td>
                 <td>
                     <a href="{{ path('inscription_show', {'id': inscription.id}) }}">show</a>
                     <a href="{{ path('inscription_edit', {'id': inscription.id}) }}">edit</a>

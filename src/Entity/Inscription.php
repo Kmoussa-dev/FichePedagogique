@@ -77,6 +77,11 @@ class Inscription
      */
     private $typeControleChoisi;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="inscriptions")
+     */
+    private $idSemestre;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +227,18 @@ class Inscription
     public function setTypeControleChoisi(string $typeControleChoisi): self
     {
         $this->typeControleChoisi = $typeControleChoisi;
+
+        return $this;
+    }
+
+    public function getIdSemestre(): ?Semestre
+    {
+        return $this->idSemestre;
+    }
+
+    public function setIdSemestre(?Semestre $idSemestre): self
+    {
+        $this->idSemestre = $idSemestre;
 
         return $this;
     }

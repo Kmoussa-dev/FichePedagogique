@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Inscription;
+use App\Entity\Semestre;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -94,6 +96,10 @@ class InscriptionType extends AbstractType
                 ],
                 'expanded'=>true
 
+            ])
+            ->add('idSemestre', EntityType::class, [
+                'class' => Semestre::class,
+                'choice_label' => 'numeroSemestre'
             ])
 
         ;
