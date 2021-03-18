@@ -1,66 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Detail des Inscription {% endblock %}
 
 {% block body %}
-    <div align="center"><h1>Récapitulatif de L'inscription</h1></div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ inscription.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ inscription.prenom }}</td>
-            </tr>
-            <tr>
-                <th>DateNaissance</th>
-                <td>{{ inscription.dateNaissance ? inscription.dateNaissance|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NumeroEtu</th>
-                <td>{{ inscription.numeroEtu }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ inscription.email }}</td>
-            </tr>
-            <tr>
-                <th>Tel</th>
-                <td>{{ inscription.tel }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ inscription.adresse }}</td>
-            </tr>
-            <tr>
-                <th>DateInscription</th>
-                <td>{{ inscription.dateInscription ? inscription.dateInscription|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Redoublant</th>
-                <td>{{ inscription.redoublant }}</td>
-            </tr>
-            <tr>
-                <th>RegimeRSE</th>
-                <td>{{ inscription.regimeRSE }}</td>
-            </tr>
-            <tr>
-                <th>TierTemps</th>
-                <td>{{ inscription.tierTemps }}</td>
-            </tr>
-            <tr>
-                <th>TypeControleChoisi</th>
-                <td>{{ inscription.typeControleChoisi }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {%  include 'disign/_card.html.twig' %}
 
-    <a href="{{ path('inscription_index') }}">back to list</a>
 
-    <a href="{{ path('inscription_edit', {'id': inscription.id}) }}">edit</a>
 
-    {{ include('inscription/_delete_form.html.twig') }}
+
 {% endblock %}

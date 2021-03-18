@@ -11,18 +11,108 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark  bg-success">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">FICHE PEDAGOGIQUE</a>
+        <a class="navbar-brand" href="/">FICHE PEDAGOGIQUE</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link " href="{{ path('inscription_new') }}">Remplir fiche Inscriprion </a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </div>
+            {% if is_granted("ROLE_USER") %}
+                <div class="dropdown">
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Inscription
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item " href="{{ path('inscription_index') }}">Liste des Etudiant inscrits</a>
+                        <a class="dropdown-item " href="{{ path('inscription_new') }}">Remplir fiche Inscriprion</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Matieres
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item " href="{{ path('matiere_index') }}">Liste des Matieres</a>
+                        <a class="dropdown-item " href="{{ path('matiere_new') }}">Choisir Matires</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    {% if is_granted('ROLE_EDITOR') %}
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Module
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item " href="{{ path('module_index') }}">Liste des Modules</a>
+                        <a class="dropdown-item " href="{{ path('module_new') }}">Ajouter Module</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="dropdown">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Semestre
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item " href="{{ path('semestre_index') }}">Liste des Semestres</a>
+                        <a class="dropdown-item " href="{{ path('semestre_new') }}">Nouveau Semestre</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="dropdown">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Parcours
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item " href="{{ path('parcours_index') }}">Les Parcours </a>
+                        <a class="dropdown-item " href="{{ path('parcours_new') }}">Creer un Nouveau  parcours</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="dropdown">
+
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Validation Inscription
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item " href="{{ path('validation_index') }}">Statuts Inscriptions </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="dropdown-item " href="{{ path('validation_new') }}">Nouveau Statut</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <div class="navbar-nav" >
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="nav-link" href="{{path('admin')  }}">Admin</a>
+                        <a class="nav-link" href="{{path('admin/utilisateurs')  }}">Utilisateurs</a>
+                    {% endif %}
+
+                </div>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                    <a href="{{ path('app_logout') }}" class="mdc-button">
+                        <span class="mdc-top-app-bar__action-item mdc-button__label">Se Déconnecter </span>
+                    </a>
+                </section>
+            {% else %}
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                    <a href="{{ path('app_login') }}" class="mdc-button">
+                        <span class="mdc-top-app-bar__action-item mdc-button__label">Se Connecter </span>
+                    </a>
+                    <a href="{{ path('app_register') }}" class="mdc-button">
+                        <span class="mdc-top-app-bar__action-item mdc-button__label">Créer un Compte </span>
+                    </a>
+                </section>
+            {% endif %}
         </div>
+
 
     </div>
 

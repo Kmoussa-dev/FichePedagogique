@@ -1,0 +1,74 @@
+<!--  dump(form)  -->
+<div class="mdc-card">
+    {{ form_start(formAnnonce) }}
+    <div>
+        <label for="{{ formAnnonce.children.nomProduit.vars.id }}"
+                class="mdc-text-field mdc-text-field--outlined">
+            <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="my-label-id">Nom du Produit</span>
+                </span>
+                <span class="mdc-notched-outline__trailing"></span>
+            </span>
+        <input type="text"
+               id="{{ formAnnonce.children.nomProduit.vars.id }}"
+               name="{{ formAnnonce.children.nomProduit.vars.full_name }}"
+               value="{{ formAnnonce.nomProduit.vars.value }}"
+               placeholder="Titre de l'article"
+               class="mdc-text-field__input" aria-labelledby="my-label-id">
+        </label>
+        {{ form_errors(formAnnonce.nomProduit) }}
+        {% do formAnnonce.nomProduit.setRendered %}
+    </div>
+    <br />
+    <div>
+        <label for="{{ formAnnonce.children.prix.vars.id }}"
+               class="mdc-text-field mdc-text-field--outlined">
+            <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="my-label-id" >Prix</span>
+                </span>
+                <span class="mdc-notched-outline__trailing"></span>
+            </span>
+            <input type="text"
+                   id="{{ formAnnonce.children.prix.vars.id }}"
+                   name="{{ formAnnonce.children.prix.vars.full_name }}"
+                   value="{{ formAnnonce.prix.vars.value }}"
+                   placeholder="Titre de l'article"
+                   class="mdc-text-field__input" aria-labelledby="my-label-id">
+        </label>
+        {{ form_errors(formAnnonce.prix) }}
+        {% do formAnnonce.prix.setRendered %}
+    </div>
+    <br>
+    <div>
+        <label for="form.children.description.vars.id"
+               class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea">
+            <span class="mdc-text-field__ripple"></span>
+            <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+            <span class="mdc-floating-label" id="my-label-id">Description</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+        </span>
+            <span class="mdc-text-field__resizer">
+            <textarea id="{{ formAnnonce.children.description.vars.id }}"
+                      name="{{ formAnnonce.children.description.vars.full_name }}"
+                      placeholder="Texte de l'article"
+                      class="mdc-text-field__input" rows="8" cols="40" aria-label="Label">{{  formAnnonce.description.vars.value }}</textarea>
+        </span>
+        </label>
+        {{ form_errors(formAnnonce.description) }}
+        {% do formAnnonce.description.setRendered %}
+    </div>
+    <div class="mdc-card__actions">
+        <button type="submit" class="mdc-button">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__label">{{ button_label }}</span>
+        </button>
+    </div>
+    {{ form_end(formAnnonce) }}
+</div>

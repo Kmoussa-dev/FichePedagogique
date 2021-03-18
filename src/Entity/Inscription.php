@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\InscriptionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=InscriptionRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\InscriptionRepository", repositoryClass=InscriptionRepository::class)
  */
 class Inscription
 {
@@ -81,6 +83,32 @@ class Inscription
      * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="inscriptions")
      */
     private $idSemestre;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Matiere::class, mappedBy="numeroEtudiant")
+     */
+    private $matieres;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Parcours::class, inversedBy="inscriptions")
+     */
+    private $idParcours;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ajac;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Validation::class, mappedBy="numero")
+     */
+    private $validations;
+
+    public function __construct()
+    {
+        $this->matieres = new ArrayCollection();
+        $this->validations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -242,4 +270,99 @@ class Inscription
 
         return $this;
     }
+
+    /**
+     * @return Collection|Matiere[]
+     */
+    public function getMatieres(): Collection
+    {
+        return $this->matieres;
+    }
+
+    public function addMatiere(Matiere $matiere): self
+    {
+        if (!$this->matieres->contains($matiere)) {
+            $this->matieres[] = $matiere;
+            $matiere->setNumeroEtudiant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatiere(Matiere $matiere): self
+    {
+        if ($this->matieres->removeElement($matiere)) {
+            // set the owning side to null (unless already changed)
+            if ($matiere->getNumeroEtudiant() === $this) {
+                $matiere->setNumeroEtudiant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (String) $this->getNumeroEtu();
+    }
+
+    public function getIdParcours(): ?Parcours
+    {
+        return $this->idParcours;
+    }
+
+    public function setIdParcours(?Parcours $idParcours): self
+    {
+        $this->idParcours = $idParcours;
+
+        return $this;
+    }
+
+    public function getAjac(): ?string
+    {
+        return $this->ajac;
+    }
+
+    public function setAjac(string $ajac): self
+    {
+        $this->ajac = $ajac;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Validation[]
+     */
+    public function getValidations(): Collection
+    {
+        return $this->validations;
+    }
+
+    public function addValidation(Validation $validation): self
+    {
+        if (!$this->validations->contains($validation)) {
+            $this->validations[] = $validation;
+            $validation->setNumero($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValidation(Validation $validation): self
+    {
+        if ($this->validations->removeElement($validation)) {
+            // set the owning side to null (unless already changed)
+            if ($validation->getNumero() === $this) {
+                $validation->setNumero(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 }

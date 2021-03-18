@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation{% endblock %}
+
+{% block body %}
+    <h1 align="center">Details de la Verification de l'inscription </h1>
+    <br><br><br>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Est Valide</th>
+                <td>{{ validation.estValide }}</td>
+            </tr>
+            <tr>
+                <th>Observation Responsable </th>
+                <td>{{ validation.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_EDITOR') %}
+        <a href="{{ path('validation_edit', {'id': validation.id}) }}">Modifie</a>
+
+        {{ include('validation/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

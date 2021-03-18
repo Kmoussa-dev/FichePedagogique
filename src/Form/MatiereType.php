@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Inscription;
 use App\Entity\Matiere;
 use App\Entity\Module;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -14,6 +15,11 @@ class MatiereType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('numeroEtudiant', EntityType::class, [
+                'class' => Inscription::class,
+                'choice_label' => 'numeroEtu'
+            ])
+
             ->add('idMatiere', EntityType::class, [
                 'class' => Module::class,
                 'choice_label' => 'idModule'
@@ -22,20 +28,11 @@ class MatiereType extends AbstractType
                 'class' => Module::class,
                 'choice_label' => 'libelle'
             ])
-
             ->add('matiereObligatoire', EntityType::class, [
                 'class' => Module::class,
                 'choice_label' => 'obligatoire'
             ])
-            ->add('coefficientMatiere', EntityType::class, [
-                'class' => Module::class,
-                'choice_label' => 'coefficient'
-            ])
-            ->add('note', EntityType::class, [
-                'class' => Module::class,
-                'choice_label' => 'noteObtenue'
-            ])
-
+            ->add('noteObtenue')
 
         ;
     }

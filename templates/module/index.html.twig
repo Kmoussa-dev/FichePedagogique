@@ -1,18 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Module index{% endblock %}
+{% block title %} Liste Module {% endblock %}
 
 {% block body %}
-    <h1>Module index</h1>
+    <h1> Liste Module </h1>
 
     <table class="table">
         <thead>
             <tr>
-
                 <th>IdModule</th>
                 <th>Libelle</th>
                 <th>Obligatoire</th>
-                <th>NoteObtenue</th>
                 <th>Coefficient</th>
                 <th>actions</th>
             </tr>
@@ -20,24 +18,21 @@
         <tbody>
         {% for module in modules %}
             <tr>
-
                 <td>{{ module.idModule }}</td>
                 <td>{{ module.libelle }}</td>
                 <td>{{ module.obligatoire }}</td>
-                <td>{{ module.noteObtenue }}</td>
                 <td>{{ module.coefficient }}</td>
                 <td>
-                    <a href="{{ path('module_show', {'id': module.id}) }}">show</a>
-                    <a href="{{ path('module_edit', {'id': module.id}) }}">edit</a>
+                    <a href="{{ path('module_show', {'id': module.id}) }}">Lire la suite</a>
+                    <a href="{{ path('module_edit', {'id': module.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="6">Liste vide </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('module_new') }}">Create new</a>
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation{% endblock %}
+
+{% block body %}
+    <h1 align="center">Modification </h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('validation/_form.html.twig', {'button_label': 'Modifier'}) }}
+        <br>
+        {{ include('validation/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

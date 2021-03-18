@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Matiere;
 use App\Form\MatiereType;
 use App\Repository\MatiereRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @IsGranted("ROLE_USER")
  * @Route("/matiere")
  */
 class MatiereController extends AbstractController
@@ -79,6 +81,7 @@ class MatiereController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}", name="matiere_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Matiere $matiere): Response

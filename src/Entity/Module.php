@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ModuleRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ModuleRepository", repositoryClass=ModuleRepository::class)
  */
 class Module
 {
@@ -35,11 +35,6 @@ class Module
     private $obligatoire;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $noteObtenue;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $coefficient;
@@ -60,24 +55,17 @@ class Module
     private $matiereObligatoire;
 
     /**
-     * @ORM\OneToMany(targetEntity=Matiere::class, mappedBy="note")
-     */
-    private $matiereNote;
-
-    /**
      * @ORM\OneToMany(targetEntity=Matiere::class, mappedBy="coefficientMatiere")
      */
-    private $matiereCoef;
+    private $matiereCoefficient;
 
     public function __construct()
     {
         $this->matieres = new ArrayCollection();
         $this->matiereNom = new ArrayCollection();
         $this->matiereObligatoire = new ArrayCollection();
-        $this->matiereNote = new ArrayCollection();
-        $this->matiereCoef = new ArrayCollection();
+        $this->matiereCoefficient = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -116,18 +104,6 @@ class Module
     public function setObligatoire(string $obligatoire): self
     {
         $this->obligatoire = $obligatoire;
-
-        return $this;
-    }
-
-    public function getNoteObtenue(): ?float
-    {
-        return $this->noteObtenue;
-    }
-
-    public function setNoteObtenue(float $noteObtenue): self
-    {
-        $this->noteObtenue = $noteObtenue;
 
         return $this;
     }
@@ -172,6 +148,10 @@ class Module
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->getIdModule();
     }
 
     /**
@@ -237,70 +217,36 @@ class Module
     /**
      * @return Collection|Matiere[]
      */
-    public function getMatiereNote(): Collection
+    public function getMatiereCoefficient(): Collection
     {
-        return $this->matiereNote;
+        return $this->matiereCoefficient;
     }
 
-    public function addMatiereNote(Matiere $matiereNote): self
+    public function addMatiereCoefficient(Matiere $matiereCoefficient): self
     {
-        if (!$this->matiereNote->contains($matiereNote)) {
-            $this->matiereNote[] = $matiereNote;
-            $matiereNote->setNote($this);
+        if (!$this->matiereCoefficient->contains($matiereCoefficient)) {
+            $this->matiereCoefficient[] = $matiereCoefficient;
+            $matiereCoefficient->setCoefficientMatiere($this);
         }
 
         return $this;
     }
 
-    public function removeMatiereNote(Matiere $matiereNote): self
+    public function removeMatiereCoefficient(Matiere $matiereCoefficient): self
     {
-        if ($this->matiereNote->removeElement($matiereNote)) {
+        if ($this->matiereCoefficient->removeElement($matiereCoefficient)) {
             // set the owning side to null (unless already changed)
-            if ($matiereNote->getNote() === $this) {
-                $matiereNote->setNote(null);
+            if ($matiereCoefficient->getCoefficientMatiere() === $this) {
+                $matiereCoefficient->setCoefficientMatiere(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection|Matiere[]
-     */
-    public function getMatiereCoef(): Collection
-    {
-        return $this->matiereCoef;
-    }
 
-    public function addMatiereCoef(Matiere $matiereCoef): self
-    {
-        if (!$this->matiereCoef->contains($matiereCoef)) {
-            $this->matiereCoef[] = $matiereCoef;
-            $matiereCoef->setCoefficientMatiere($this);
-        }
 
-        return $this;
-    }
 
-    public function removeMatiereCoef(Matiere $matiereCoef): self
-    {
-        if ($this->matiereCoef->removeElement($matiereCoef)) {
-            // set the owning side to null (unless already changed)
-            if ($matiereCoef->getCoefficientMatiere() === $this) {
-                $matiereCoef->setCoefficientMatiere(null);
-            }
-        }
-
-        return $this;
-    }
-    public function __toString(): string
-    {
-        return $this->getIdModule();
-    }
-    public function __toString2(): string
-    {
-        return $this->getLibelle();
-    }
 
 
 

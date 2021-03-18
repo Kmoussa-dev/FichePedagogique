@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parcours {% endblock %}
+
+{% block body %}
+    <h1>Parcours </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Niveau</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for parcour in parcours %}
+            <tr>
+                <td>{{ parcour.niveau }}</td>
+                <td>
+
+                    <a href="{{ path('parcours_show', {'id': parcour.id}) }}">Lire la suite</a>
+                    <a href="{{ path('parcours_edit', {'id': parcour.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Liste vide !</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

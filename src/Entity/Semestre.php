@@ -29,6 +29,9 @@ class Semestre
      */
     private $inscriptions;
 
+
+
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
@@ -84,4 +87,8 @@ class Semestre
     {
         return  $this->getSemestre();
     }
+
+
+
+
 }

@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Inscription{% endblock %}
+{% block title %}Nouvelle Inscription{% endblock %}
 
 {% block body %}
-   <div align="center"> <h1>Fiche d'Inscription</h1></div>
-    <div>
-        {{ include('inscription/_form.html.twig') }}
+   <fieldset>
+       <div align="center" > <h1>Fiche d'Inscription</h1></div><br>
+       <div >
+           {{ include('inscription/_form.html.twig') }}
 
-        <a href="{{ path('inscription_index') }}">back to list</a>
-    </div>
+           <a href="{{ path('inscription_index') }}">Retour Acceuil</a>
+       </div>
+   </fieldset>
 
 
 {% endblock %}

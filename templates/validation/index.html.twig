@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation{% endblock %}
+
+{% block body %}
+    <h1 align="center">Statut des Inscription </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numero Etudiant</th>
+                <th>EstValide</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for validation in validations %}
+            <tr>
+                <td>{{ validation.numero }}</td>
+                <td>{{ validation.estValide }}</td>
+                <td>{{ validation.description }}</td>
+                <td>
+                    <a href="{{ path('validation_show', {'id': validation.id}) }}">Lire la suite</a>
+                    {% if is_granted('ROLE_EDITOR') %}
+                        <a href="{{ path('validation_edit', {'id': validation.id}) }}">Modifier</a>
+                    {% endif %}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Liste vide !</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

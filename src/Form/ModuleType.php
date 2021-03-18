@@ -15,7 +15,6 @@ class ModuleType extends AbstractType
             ->add('idModule')
             ->add('libelle')
             ->add('obligatoire')
-            ->add('noteObtenue')
             ->add('coefficient')
         ;
     }

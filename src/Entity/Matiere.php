@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\MatiereRepository;
+use App\Repository\InscriptionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=MatiereRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\MatiereRepository", repositoryClass=MatiereRepository::class)
  */
 class Matiere
 {
@@ -18,13 +21,17 @@ class Matiere
     private $id;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    private $noteObtenue;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="matieres")
      */
     private $idMatiere;
 
     /**
      * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="matiereNom")
-     *
      */
     private $nomMatiere;
 
@@ -34,18 +41,43 @@ class Matiere
     private $matiereObligatoire;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="matiereNote")
-     */
-    private $note;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="matiereCoef")
+     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="matiereCoefficient")
      */
     private $coefficientMatiere;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Inscription::class, inversedBy="matieres")
+     */
+    private $numeroEtudiant;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="affiche")
+     */
+    private $inscriptions;
+
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNoteObtenue(): ?float
+    {
+        return $this->noteObtenue;
+    }
+
+    public function setNoteObtenue(float $noteObtenue): self
+    {
+        $this->noteObtenue = $noteObtenue;
+
+        return $this;
     }
 
     public function getIdMatiere(): ?Module
@@ -84,29 +116,68 @@ class Matiere
         return $this;
     }
 
-    public function getNote(): ?Module
-    {
-        return $this->note;
-    }
-
-    public function setNote(?Module $note): self
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-    public function getCoefficientMatiere(): ?Module
+    public function getCoefficientMatiere(): ?int
     {
         return $this->coefficientMatiere;
     }
 
-    public function setCoefficientMatiere(?Module $coefficientMatiere): self
+    public function setCoefficientMatiere(int $coefficientMatiere): self
     {
         $this->coefficientMatiere = $coefficientMatiere;
 
         return $this;
     }
+
+    public function getNumeroEtudiant(): ?Inscription
+    {
+        return $this->numeroEtudiant;
+    }
+
+    public function setNumeroEtudiant(?Inscription $numeroEtudiant): self
+    {
+        $this->numeroEtudiant = $numeroEtudiant;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this->getNomMatiere();
+    }
+
+    /**
+     * @return Collection|Inscription[]
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions[] = $inscription;
+            $inscription->setAffiche($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Inscription $inscription): self
+    {
+        if ($this->inscriptions->removeElement($inscription)) {
+            // set the owning side to null (unless already changed)
+            if ($inscription->getAffiche() === $this) {
+                $inscription->setAffiche(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
+
 
 
 
