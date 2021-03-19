@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Etudiant;
 use App\Entity\Inscription;
 use App\Entity\Module;
+use App\Entity\Parcours;
 use App\Entity\Semestre;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -36,6 +37,23 @@ class AppFixtures extends Fixture
                 ->setPassword($this->passwordEncoder->encodePassword($user, 'tonton'));
             $manager->persist($user);
         }
+        for ($k = 1; $k <= 6; $k++) {
+            $semestre = new Semestre();
+            $semestre->setNumeroSemestre((string)'Semestre' . $k);
+            $manager->persist($semestre);
+        }
+            for ($k = 1; $k <= 6; $k++) {
+                $parcours = new Parcours();
+                $parcours->setNiveau((string)'L' . $k);
+                $manager->persist($parcours);
+            }for ($k = 1; $k <= 6; $k++) {
+                $module = new Module();
+                $module->setIdModule((string)'M' . $k)
+                    ->setLibelle("m".$k)
+                    ->setObligatoire("oui")
+                    ->setCoefficient($k);
+                $manager->persist($module);
+            }
         /**
          * for($i=1;$i<=4;$i++) {
         $inscription = new Inscription();

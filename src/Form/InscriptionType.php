@@ -33,15 +33,7 @@ class InscriptionType extends AbstractType
             ))
 
             ->add('email')
-            ->add('tel', NumberType::class, array(
-                'required' => true,
-                'attr' => [
-                    'type' => 'text',
-                    'class' => 'form-control input-inline datepicker',
-                    'data-provide' => 'numberpicker',
-                ],
-                'html5' => true,
-            ))
+            ->add('tel')
             ->add('adresse')
             ->add('numeroEtu', NumberType::class, array(
                 'required' => true,
@@ -52,16 +44,7 @@ class InscriptionType extends AbstractType
                 ],
                 'html5' => true,
             ))
-            ->add('dateInscription', DateTimeType::class, array(
-                'required' => true,
-                'widget' => 'single_text',
-                'attr' => [
-                    'type' => 'text',
-                    'class' => 'form-control input-inline datetimepicker',
-                    'data-provide' => 'datetimepicker',
-                ],
-                'html5' => true,
-            ))
+
             ->add('regimeRSE', ChoiceType::class, [
                 'choices' => [
                     'oui' => 'Oui',

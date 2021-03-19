@@ -2,12 +2,12 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item"><h5>Nom :       {{ inscription.nom }}  </h5></li>
         <li class="list-group-item"><h5> Prenom :   {{ inscription.prenom }}</h5></li>
-        <li class="list-group-item">    <h5> Né le : {{ inscription.dateNaissance ? inscription.dateNaissance|date('d-m-Y') : '' }}</h5></li>
+        <li class="list-group-item">    <h5> Né le : {{ inscription.dateNaissance | date('d/m/Y') }}</h5></li>
         <li class="list-group-item">    <h5> Numero d'étudiant : {{ inscription.numeroEtu }}</h5></li>
         <li class="list-group-item">    <h5> Adresse mail :  {{ inscription.email }} </h5></li>
         <li class="list-group-item">    <h5>Téléphone : {{ inscription.tel }}</h5></li>
         <li class="list-group-item">    <h5>Adresse postale : {{ inscription.adresse }}</h5></li>
-        <li class="list-group-item">    <h5>Date Inscription : {{ inscription.dateInscription ? inscription.dateInscription|date('Y-m-d H:i:s') : '' }}</h5></li>
+        <li class="list-group-item">    <h5>Date Inscription : {{ inscription.dateInscription |date('d-m-Y à H:i:s')  }}</h5></li>
         <li class="list-group-item">    <h5>Redoublant : {{ inscription.redoublant }}</h5></li>
         <li class="list-group-item">    <h5>Ajac : {{ inscription.ajac }}</h5></li>
         <li class="list-group-item">    <h5>RSE : {{ inscription.regimeRSE }}</h5></li>
@@ -17,9 +17,7 @@
         <li class="list-group-item">    <h5>Semestre : {{ inscription.idSemestre.numeroSemestre }}</h5></li>
         <li class="list-group-item"> <h5>Identifiant Matiere : {% for matiere in inscription.matieres %}
                     {{matiere.nomMatiere.idModule  }}
-                {% endfor %}</h5> <h5>Identifiant Matiere : {% for matiere in inscription.matieres %}
-                    {{matiere.nomMatiere.idModule  }}
-                {% endfor %}</h5></li>
+                {% endfor %}</h5> </li>
         <li class="list-group-item"><h5>Matiere  : {% for matiere in inscription.matieres %}
                     {{matiere.nomMatiere.libelle  }}
                 {% endfor %}</h5></li>
@@ -43,11 +41,13 @@
 
     </ul>
 
+
     {% if is_granted('ROLE_EDITOR') %}
         <div class="mdc-card__actions">
             <button onclick="location.href='{{ path('inscription_edit', {'id': inscription.id}) }}'"
                     class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon"
                     title="Edit">edit</button>
+            <br>
             <form method="post" action="{{ path('inscription_delete', {'id': inscription.id}) }}"
                   onsubmit="return confirm('etes vous sur de vouloir supprimer ?')">
                 <input type="hidden" name="_method" value="DELETE">
@@ -57,5 +57,6 @@
             </form>
         </div>
     {% endif %}
+    <br>
 
 </div>

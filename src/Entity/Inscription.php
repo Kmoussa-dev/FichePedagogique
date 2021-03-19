@@ -6,6 +6,7 @@ use App\Repository\InscriptionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InscriptionRepository", repositoryClass=InscriptionRepository::class)
@@ -21,11 +22,15 @@ class Inscription
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=2,minMessage="le nombre de caracteres est inferieur a {{ limit }}")
+     * @Assert\Length(max=30,minMessage="le nombre de caracteres est superieur a {{ limit }}")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=2,minMessage="le nombre de caracteres est inferieur a {{ limit }}")
+     * @Assert\Length(max=30,minMessage="le nombre de caracteres est superieur a {{ limit }}")
      */
     private $prenom;
 
@@ -36,28 +41,32 @@ class Inscription
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Length(min=5,minMessage="le numero etudiant est inferieur a {{ limit }}")
+     * @Assert\Length(max=10,minMessage="le numero etudiant est superieur a {{ limit }}")
      */
     private $numeroEtu;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message = "l'email '{{ value }}' n'est pas un email valide .")
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Length(min=9,minMessage="le numero de telephone est inferieur a {{ limit }}")
+     * @Assert\Length(max=10,minMessage="le numero de telephone est superieur a {{ limit }}")
      */
     private $tel;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=10,minMessage="le nombre de caracteres est inferieur a {{ limit }}")
+     * @Assert\Length(max=30,minMessage="le nombre de caracteres est superieur a {{ limit }}")
      */
     private $adresse;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateInscription;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -103,6 +112,11 @@ class Inscription
      * @ORM\OneToMany(targetEntity=Validation::class, mappedBy="numero")
      */
     private $validations;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateInscription;
 
     public function __construct()
     {

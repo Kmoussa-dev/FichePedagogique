@@ -41,7 +41,7 @@ class MatiereController extends AbstractController
             $entityManager->persist($matiere);
             $entityManager->flush();
 
-            return $this->redirectToRoute('matiere_index');
+            return $this->redirectToRoute('inscription_index');
         }
 
         return $this->render('matiere/new.html.twig', [

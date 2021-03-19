@@ -1,0 +1,41 @@
+<div class="card" style="width: 90rem;" >
+        <h5>Nom :       {{ inscription.nom }}  </h5>
+       <h5> Prenom :   {{ inscription.prenom }}</h5>
+        <h5> Né le : {{ inscription.dateNaissance | date('d/m/Y') }}</h5>
+        <h5> Numero d'étudiant : {{ inscription.numeroEtu }}</h5>
+        <h5> Adresse mail :  {{ inscription.email }} </h5>
+        <h5>Téléphone : {{ inscription.tel }}</h5></li>
+        <h5>Adresse postale : {{ inscription.adresse }}</h5>
+        <h5>Date Inscription : {{ inscription.dateInscription |date('d-m-Y à H:i:s')  }}</h5>
+        <h5>Redoublant : {{ inscription.redoublant }}</h5>
+        <h5>Ajac : {{ inscription.ajac }}</h5>
+        <h5>RSE : {{ inscription.regimeRSE }}</h5>
+        <h5>Tier-Temps : {{ inscription.tierTemps }}</h5>
+        <h5>Type de control : {{ inscription.typeControleChoisi }}</h5>
+        <h5>Parcours : {{ inscription.idParcours.niveau }}</h5>
+        <h5>Semestre : {{ inscription.idSemestre.numeroSemestre }}</h5>
+        <h5>Identifiant Matiere : {% for matiere in inscription.matieres %}
+                    {{matiere.nomMatiere.idModule  }}
+                {% endfor %}</h5>
+        <h5>Matiere  : {% for matiere in inscription.matieres %}
+                    {{matiere.nomMatiere.libelle  }}
+                {% endfor %}</h5>
+        <h5>Suivie Obligatoire : {% for matiere in inscription.matieres %}
+                    {{matiere.nomMatiere.obligatoire  }}
+                {% endfor %}</h5>
+        <h5>Coefficient Matiere : {% for matiere in inscription.matieres %}
+                    {{matiere.nomMatiere.coefficient  }}
+                {% endfor %}</h5><br>
+
+
+            <h5>Validation de la fiche  : {% for validation in inscription.validations %}
+                    {{ validation.estValide }}
+                    {% endfor %}
+                    </h5>
+        <h5>Observation du responsable   : {% for validation in inscription.validations %}
+                    {{ validation.description }}
+                    {% endfor %}
+                    </h5>
+
+
+</div>
