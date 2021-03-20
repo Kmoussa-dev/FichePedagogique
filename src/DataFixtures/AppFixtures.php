@@ -25,18 +25,23 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = new User();
-        $user->setEmail('moi@moi.fr')
+        $user->setEmail('professeur@prof.fr')
             ->setRoles(['ROLE_ADMIN'])
-            ->setPassword($this->passwordEncoder->encodePassword($user, 'moi'));
+            ->setPassword($this->passwordEncoder->encodePassword($user, 'professeur'));
+        $manager->persist($user);
+        $user = new User();
+        $user->setEmail('secretaire@secret.fr')
+            ->setRoles(['ROLE_EDITOR'])
+            ->setPassword($this->passwordEncoder->encodePassword($user, 'secretaire'));
+        $manager->persist($user);
+        $user = new User();
+        $user->setEmail('etudiant@etu.fr')
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordEncoder->encodePassword($user, 'etudiant'));
+
         $manager->persist($user);
         $faker = \Faker\Factory::create("fr_FR");
 
-        for ($i = 1; $i <= 3; $i++) {
-            $user = new User();
-            $user->setEmail($faker->email)
-                ->setPassword($this->passwordEncoder->encodePassword($user, 'tonton'));
-            $manager->persist($user);
-        }
         for ($k = 1; $k <= 6; $k++) {
             $semestre = new Semestre();
             $semestre->setNumeroSemestre((string)'Semestre' . $k);

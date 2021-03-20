@@ -114,9 +114,11 @@ class Inscription
     private $validations;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateInscription;
+
+
 
     public function __construct()
     {
@@ -213,17 +215,6 @@ class Inscription
         return $this;
     }
 
-    public function getDateInscription(): ?\DateTimeInterface
-    {
-        return $this->dateInscription;
-    }
-
-    public function setDateInscription(\DateTimeInterface $dateInscription): self
-    {
-        $this->dateInscription = $dateInscription;
-
-        return $this;
-    }
 
     public function getRedoublant(): ?string
     {
@@ -373,6 +364,18 @@ class Inscription
                 $validation->setNumero(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(?\DateTimeInterface $dateInscription): self
+    {
+        $this->dateInscription = $dateInscription;
 
         return $this;
     }
