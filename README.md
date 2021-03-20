@@ -1,10 +1,9 @@
-# question 1 les membres du groupe
+#les membres du groupe
 Mvondo Pierre
 Hugo Vernet
 Moussa Bakayoko
 
 ##########################################
-# question 2 
 
 #installation de composer
 
@@ -12,7 +11,7 @@ symfony composer require symfony/orm-pack
 symfony composer require --dev symfony/maker-bundle
 #creation de la base de donnee
 symfony console doctrine:database:create
-# creation de l'entité Inscription, Matiere,parcours,Semestre,
+# creation de l'entité Inscription, Matiere,parcours,Semestre,...
 
 
 symfony console make:entity
@@ -22,7 +21,7 @@ symfony console doctrine:migrations:migrate
 
 ###############################################
 
-# question 3 : creation de la fixture avec faker
+#  creation de la fixture avec faker
 #inqtallation de faker
 symfony composer require fakerphp/faker
 # inqtallation de la fixture
@@ -34,16 +33,16 @@ symfony console make:fixture
 symfony console doctrine:fixtures:load
 
 ############################################
-# question 4 : creation des page de visualisations
+# creation des page de visualisations
 # # creation du controlleur
 symfony console make:controller
-#avec des ajouts des methodes creation,modifier,supprimer une annonce
+
 # creation automatique d'un formulaire
 symfony console make:form
 
 #################################################
 
-# question 5 : possibilité d'écrire les descriptions au format markdown
+# possibilité d'écrire les descriptions au format markdown
 
 # on appel la classes et Interfaces données par l'autowiring
 symfony console debug:autowiring --all
@@ -55,38 +54,33 @@ cebe\markdown\Markdown: ~
 
 #################################################
 
-# question 6 : Affichage des annonces par tri croissant 
-# pour afficher par tri croissant on dans l'index.html.twig on rajoute la commande dans le for :
 
-{% for annonces in annonce |sort((a, b) => a.prix <=> b.prix) %}
-
-
-################################################
-
-# question 7 Material disign 
+#  bootstrap et  Material disign 
 # inpiration du site 
+https://getbootstrap.com/
 https://material.io/
 # creation de :
 App bars: top, Buttons
 Card
 formulaire
+nav bar
 
 #############################################
 
-# question 8 : creation de l'entité user
+# creation de l'entité user
  # # pour creer l'entité user on fait :
 symfony console make:user
  # # Création du module d’authentification
 symfony console make:auth
 # on modifie  public function onAuthenticationSuccess en rajoutant :
-return new RedirectResponse($this->urlGenerator->generate('annonce_index'));
+return new RedirectResponse($this->urlGenerator->generate('inscription_index'));
 # Création d’un formulaire d’inscription avec la commande :
 symfony console make:regislation-form 
 
 ###############################################
 
-# question 11 : contraintes de validation 
-# pour les contraintes de validations nous avont utiliser assert ans les classes User et Annonce :
+#  contraintes de validation 
+# pour les contraintes de validations nous avont utiliser assert ans les classes User et inscription :
 use Symfony\Component\Validator\Constraints as Assert;
 
 @Assert\Length(min=3,minMessage="le nombre de caracteres est inferieur a {{ limit }}")
@@ -103,13 +97,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 ###########################################
 
-# question 9 : relation entre Annonce et User 
+ relation entre inscription et matiere ,module parcours  et User 
 
 # pour creer la relation on a utiliser la relation ManyToOne .
 ManyToOne
-# ceci apres avoir rajouter l'attribut auteur dans l'entité Annonce
 
 ##############################################
-
-# question 10  la création d’une annonce ne soit possible que par un utilisateur connecté
- # question ok
