@@ -40,17 +40,6 @@ symfony console make:controller
 # creation automatique d'un formulaire
 symfony console make:form
 
-#################################################
-
-# possibilité d'écrire les descriptions au format markdown
-
-# on appel la classes et Interfaces données par l'autowiring
-symfony console debug:autowiring --all
-# Pour avoir le format Markdown on fait : 
-symfony composer require cebe/markdown
-#Ensuite on modifie la Classe Controller pour rajouter un parser de type Markdown, et on précise le nouveau service
-#dans notre dossier config/dans le fichier services.yaml qpuis on rajoute la ligne
-cebe\markdown\Markdown: ~
 
 #################################################
 
