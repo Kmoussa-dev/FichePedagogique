@@ -2,6 +2,7 @@
 Mvondo Pierre
 Hugo Vernet
 Moussa Bakayoko
+Moussa Kone 
 
 ##########################################
 
